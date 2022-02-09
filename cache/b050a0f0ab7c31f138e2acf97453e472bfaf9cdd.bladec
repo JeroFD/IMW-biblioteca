@@ -1,0 +1,46 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('contenido'); ?>
+<h1>Editoriales</h1>
+<div class="d-flex justify-content-between mb-2">
+ <form action="index.php" method="post">
+ <div class="input-group">
+ <input class="form-control" type="text" name="buscar">
+ <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+ </div>
+ </form>
+ <a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i></a>
+</div>
+
+<table class="table table-striped table-bordered">
+ <tr>
+ <th>Código</th>
+ <th>Nombre</th>
+ <th colspan="2">Opciones</th>
+ </tr>
+ <?php $__currentLoopData = $datos; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $clave => $valor): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <td><?php echo \htmlentities($valor['id_editorial'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($valor['nombre'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?id_editorial=<?php echo \htmlentities($valor['id_editorial'], ENT_QUOTES, 'UTF-8', false); ?>">
+ <i class="fa fa-pencil" aria-hidden="true"></i>
+ </a>
+ </td>
+ <td>
+ <a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?id_editorial=<?php echo \htmlentities($valor['id_editorial'], ENT_QUOTES, 'UTF-8', false); ?>">
+ <i class="fa fa-trash" aria-hidden="true"></i>
+ </a>
+ </td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+</table>
+<a href="../index.php" class="btn btn-outline-primary">Volver</a>
+
+<script>
+ function asegurar () {
+ rc = confirm("¿Seguro que desea Eliminar?");
+ return rc;
+ }
+</script>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('plantillaadmin'); } ?>
