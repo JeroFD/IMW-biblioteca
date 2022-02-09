@@ -1,0 +1,18 @@
+@extends('plantillaadmin')
+@section('contenido')
+<h1>Modificar categoría</h1>
+
+<form method="post">
+    <p>
+        <label for="nombre">Categoria</label>
+        <input id="nombre" type="text" name="nombre" value="{{$categoria['nombre']}}">
+    </p>
+    <input type="hidden" name="id_categoria" value="{{$categoria['id_categoria']}}">
+
+    <input type="submit" value="Modificar" class="btn btn-primary">
+    <a href="index.php" class="btn btn-danger">Cancelar</a>
+    </p>
+</form>
+</body>
+</html>
+@endsection
