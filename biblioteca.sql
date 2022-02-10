@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-02-2022 a las 12:07:30
+-- Tiempo de generación: 10-02-2022 a las 13:28:07
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -73,7 +73,7 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`, `fecha_creacion`, `fecha_mod
 (2, 'Acción', '2021-12-03 12:30:00', '2021-12-03 12:30:33'),
 (3, 'Aventuras', '2021-12-03 12:30:00', '2021-12-03 12:30:38'),
 (4, 'Terror', '2021-12-03 12:30:00', '2021-12-03 12:30:41'),
-(24, 'Novela negra', '2021-12-15 10:36:10', '2021-12-15 10:36:10');
+(25, 'Novela negra', '2022-02-09 11:26:54', '2022-02-09 11:26:54');
 
 -- --------------------------------------------------------
 
@@ -107,6 +107,7 @@ INSERT INTO `editorial` (`id_editorial`, `nombre`, `fecha_creacion`, `fecha_modi
 
 CREATE TABLE `libros` (
   `codigo` int(11) NOT NULL,
+  `portada` text NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `autor` varchar(255) NOT NULL,
   `disponible` tinyint(4) NOT NULL,
@@ -118,12 +119,12 @@ CREATE TABLE `libros` (
 -- Volcado de datos para la tabla `libros`
 --
 
-INSERT INTO `libros` (`codigo`, `titulo`, `autor`, `disponible`, `fecha_creacion`, `fecha_modificacion`) VALUES
-(1, 'La Guerra y la Paz', 'León Tolstoi', 1, '2022-01-09 21:54:51', '2022-01-09 21:54:51'),
-(2, 'Las Aventuras de Huckleberry Finn', 'Mark Twain', 0, '2022-01-09 21:54:51', '2022-01-09 21:54:51'),
-(3, 'Hamlet', 'William Shakespeare', 1, '2022-01-09 21:54:51', '2022-01-09 21:54:51'),
-(4, 'En busca del tiempo perdido', 'Marcel Proust', 0, '2022-01-09 21:54:51', '2022-01-09 21:54:51'),
-(5, 'Don Quijote de la Mancha', 'Miguel de Cervantes', 1, '2022-01-09 21:54:51', '2022-01-09 21:54:51');
+INSERT INTO `libros` (`codigo`, `portada`, `titulo`, `autor`, `disponible`, `fecha_creacion`, `fecha_modificacion`) VALUES
+(1, '1.jpg', 'La Guerra y la Paz', 'León Tolstoi', 1, '2022-01-09 21:54:51', '2022-02-10 12:03:00'),
+(2, '2.jpg', 'Las Aventuras de Huckleberry Finn', 'Mark Twain', 0, '2022-01-09 21:54:51', '2022-02-10 12:06:34'),
+(3, '3.jpg', 'Hamlet', 'William Shakespeare', 1, '2022-01-09 21:54:51', '2022-02-10 12:10:28'),
+(4, '4.jpg', 'En busca del tiempo perdido', 'Marcel Proust', 0, '2022-01-09 21:54:51', '2022-02-10 12:10:28'),
+(5, '5.jpg', 'Don Quijote de la Mancha', 'Miguel de Cervantes', 1, '2022-01-09 21:54:51', '2022-02-10 12:10:28');
 
 -- --------------------------------------------------------
 
@@ -244,7 +245,7 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `editorial`
