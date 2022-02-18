@@ -1,15 +1,6 @@
 @extends('plantillaadmin')
 @section('contenido')
 <h1>Editoriales</h1>
-<div class="d-flex justify-content-between mb-2">
-    <form action="index.php" method="post">
-        <div class="input-group">
-            <input class="form-control" type="text" name="buscar">
-            <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-        </div>
-    </form>
-    <a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i></a>
-</div>
 
 <table class="table table-striped table-bordered">
     <tr>
@@ -22,7 +13,7 @@
         <td>{{$valor['id_editorial']}}</td>
         <td>{{$valor['nombre']}}</td>
         <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?id_editorial={{$valor['id_editorial']}}">
-                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <i class="fa fa-pen" aria-hidden="true"></i>
             </a>
         </td>
         <td>
@@ -32,6 +23,7 @@
         </td>
     </tr>
     @endforeach
+    <td class="text-center" colspan="4"><a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo registro</a></td>
 </table>
 <a href="../index.php" class="btn btn-outline-primary">Volver</a>
 

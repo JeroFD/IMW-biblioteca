@@ -1,5 +1,5 @@
 <?php $_shouldextend[1]=1; ?>
- <?php $this->startSection('contenido'); ?>
+<?php $this->startSection('contenido'); ?>
 
 <div class="container h-100">
  <div class="row h-100 mt-5 justify-content-center align-items-center">
@@ -27,4 +27,8 @@
  </div>
  </div>
 </div>
+<?php $this->startSection('piedepagina'); ?>
+ <p>© 2022 - Jerónimo Omar Falcón Dávila</p>
+<?php $this->stopSection(); ?>
+<?php $this->stopSection(); ?>
 <?php if (isset($_shouldextend[1])) { echo $this->runChild('plantilla'); } ?>

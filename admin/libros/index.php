@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $datos = $pdo->prepare('SELECT * FROM libros;');
     $datos->execute();
 }
+
 try {
     echo $blade->run("admin/libros/index.blade.php",
         [

@@ -9,11 +9,14 @@ $cache = __DIR__ . '/cache';
 
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
-
-$stmt = $pdo-> prepare('SELECT * FROM libros');
-$stmt -> execute();
-$libros = $stmt->fetchAll();
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $titulo = $_REQUEST["buscar"] ?? null;
+    $libros = $pdo->prepare('SELECT * FROM libros WHERE titulo like CONCAT("%", :titulo, "%")');
+    $libros->execute(["titulo" => $titulo]);
+} else {
+    $libros = $pdo->prepare('SELECT * FROM libros;');
+    $libros->execute();
+}
 
 $stmt = $pdo-> prepare('SELECT * FROM autores');
 $stmt -> execute();

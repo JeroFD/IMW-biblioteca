@@ -1,3 +1,8 @@
+<?php
+    if (isset($_SESSION["id"])) {
+        header('login.php');
+    }
+?>
 <h1>Panel del alumnado</h1>
 <ul>
     <li><a>Libros</a></li>

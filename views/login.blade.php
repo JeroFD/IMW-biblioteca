@@ -1,5 +1,5 @@
 @extends('plantilla')
-        @section('contenido')
+@section('contenido')
 
 <div class="container h-100">
     <div class="row h-100 mt-5 justify-content-center align-items-center">
@@ -27,3 +27,7 @@
         </div>
     </div>
 </div>
+@section('piedepagina')
+    <p>© 2022 - Jerónimo Omar Falcón Dávila</p>
+@endsection
+@endsection
