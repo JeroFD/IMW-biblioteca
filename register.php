@@ -12,9 +12,9 @@ $cache = __DIR__ . '/cache';
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
 if(isset($_POST['submit'])) {
-    if(isset($_POST['first_name'],$_POST['last_name'],$_POST['email'],$_POST['password']) && !empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-        $firstName = trim($_POST['first_name']);
-        $lastName = trim($_POST['last_name']);
+    if(isset($_POST['nombre'],$_POST['apellidos'],$_POST['email'],$_POST['password']) && !empty($_POST['nombre']) && !empty($_POST['apellidos']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+        $nombre = trim($_POST['nombre']);
+        $apellidos = trim($_POST['apellidos']);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
         $options = array("cost" => 4);
@@ -27,12 +27,12 @@ if(isset($_POST['submit'])) {
             $stmt->execute($p);
 
             if($stmt->rowCount() == 0) {
-                $sql = "INSERT INTO usuarios (first_name, last_name, email, `password`, created_at,updated_at) VALUES (:fname,:lname,:email,:pass,:created_at,:updated_at)";
+                $sql = "INSERT INTO usuarios (nombre, apellidos, email, `password`, created_at,updated_at) VALUES (:fname,:lname,:email,:pass,:created_at,:updated_at)";
                 try {
                     $handle = $pdo->prepare($sql);
                     $params = [
-                        ':fname' => $firstName,
-                        ':lname' => $lastName,
+                        ':fname' => $nombre,
+                        ':lname' => $apellidos,
                         ':email' => $email,
                         ':pass' => $hashPassword,
                         ':created_at' => $date,
@@ -45,8 +45,8 @@ if(isset($_POST['submit'])) {
                     $errors[] = $e->getMessage();
                 }
             } else {
-                $valFirstName = $firstName;
-                $valLastName = $lastName;
+                $valFirstName = $nombre;
+                $valLastName = $apellidos;
                 $valEmail = '';
                 $valPassword = $password;
 
@@ -55,15 +55,15 @@ if(isset($_POST['submit'])) {
         } else {
             $errors[] = "Email address is not valid";}
     } else {
-        if(!isset($_POST['first_name']) || empty($_POST['first_name'])){
+        if(!isset($_POST['nombre']) || empty($_POST['nombre'])){
             $errors[] = 'First name is required';
         } else {
-            $valFirstName = $_POST['first_name'];
+            $valFirstName = $_POST['nombre'];
         }
-        if(!isset($_POST['last_name']) || empty($_POST['last_name'])){
+        if(!isset($_POST['apellidos']) || empty($_POST['apellidos'])){
             $errors[] = 'Last name is required';
         } else {
-            $valLastName = $_POST['last_name'];
+            $valLastName = $_POST['apellidos'];
         }
         if(!isset($_POST['email']) || empty($_POST['email'])){
             $errors[] = 'Email is required';

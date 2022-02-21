@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-02-2022 a las 12:07:30
+-- Tiempo de generación: 21-02-2022 a las 14:05:38
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -73,7 +73,7 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`, `fecha_creacion`, `fecha_mod
 (2, 'Acción', '2021-12-03 12:30:00', '2021-12-03 12:30:33'),
 (3, 'Aventuras', '2021-12-03 12:30:00', '2021-12-03 12:30:38'),
 (4, 'Terror', '2021-12-03 12:30:00', '2021-12-03 12:30:41'),
-(24, 'Novela negra', '2021-12-15 10:36:10', '2021-12-15 10:36:10');
+(25, 'Novela negra', '2022-02-09 11:26:54', '2022-02-09 11:26:54');
 
 -- --------------------------------------------------------
 
@@ -107,8 +107,11 @@ INSERT INTO `editorial` (`id_editorial`, `nombre`, `fecha_creacion`, `fecha_modi
 
 CREATE TABLE `libros` (
   `codigo` int(11) NOT NULL,
+  `portada` text DEFAULT NULL,
   `titulo` varchar(255) NOT NULL,
-  `autor` varchar(255) NOT NULL,
+  `id_autor` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `id_editorial` int(11) NOT NULL,
   `disponible` tinyint(4) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `fecha_modificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -118,12 +121,9 @@ CREATE TABLE `libros` (
 -- Volcado de datos para la tabla `libros`
 --
 
-INSERT INTO `libros` (`codigo`, `titulo`, `autor`, `disponible`, `fecha_creacion`, `fecha_modificacion`) VALUES
-(1, 'La Guerra y la Paz', 'León Tolstoi', 1, '2022-01-09 21:54:51', '2022-01-09 21:54:51'),
-(2, 'Las Aventuras de Huckleberry Finn', 'Mark Twain', 0, '2022-01-09 21:54:51', '2022-01-09 21:54:51'),
-(3, 'Hamlet', 'William Shakespeare', 1, '2022-01-09 21:54:51', '2022-01-09 21:54:51'),
-(4, 'En busca del tiempo perdido', 'Marcel Proust', 0, '2022-01-09 21:54:51', '2022-01-09 21:54:51'),
-(5, 'Don Quijote de la Mancha', 'Miguel de Cervantes', 1, '2022-01-09 21:54:51', '2022-01-09 21:54:51');
+INSERT INTO `libros` (`codigo`, `portada`, `titulo`, `id_autor`, `id_categoria`, `id_editorial`, `disponible`, `fecha_creacion`, `fecha_modificacion`) VALUES
+(12, NULL, 'Guerra y paz', 1, 2, 1, 1, '2022-02-21 12:27:55', '2022-02-21 12:27:55'),
+(13, NULL, 'Las aventuras de Huckleberry Finn', 2, 1, 2, 0, '2022-02-21 12:55:36', '2022-02-21 12:55:36');
 
 -- --------------------------------------------------------
 
@@ -165,21 +165,22 @@ CREATE TABLE `sanciones` (
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `apellidos` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `tipo` enum('Bibliotecario','Alumnado','Profesorado') NOT NULL
+  `tipo` enum('Bibliotecario','Alumnado','Profesorado') NOT NULL,
+  `activo` tinyint(4) NOT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fecha_modificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `first_name`, `last_name`, `email`, `password`, `created_at`, `updated_at`, `tipo`) VALUES
-(1, 'Jerónimo Omar', 'Falcón Dávila', 'jeronimo@example.com', '$2y$04$XELx6wylEPnr1ly4XpvD2eT0qJh2ANRWXB60Fe1YY6AagJsZCabYO', '2022-02-07 11:15:39', '2022-02-07 11:15:39', 'Bibliotecario');
+INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `email`, `password`, `tipo`, `activo`, `fecha_creacion`, `fecha_modificacion`) VALUES
+(1, 'Jerónimo Omar', 'Falcón Dávila', 'jeronimo@example.com', '$2y$04$XELx6wylEPnr1ly4XpvD2eT0qJh2ANRWXB60Fe1YY6AagJsZCabYO', 'Bibliotecario', 0, '2022-02-07 11:15:39', '2022-02-07 11:15:39');
 
 --
 -- Índices para tablas volcadas
@@ -207,7 +208,10 @@ ALTER TABLE `editorial`
 -- Indices de la tabla `libros`
 --
 ALTER TABLE `libros`
-  ADD PRIMARY KEY (`codigo`);
+  ADD PRIMARY KEY (`codigo`),
+  ADD KEY `id_autor` (`id_autor`),
+  ADD KEY `libros_ibfk_2` (`id_categoria`),
+  ADD KEY `id_editorial` (`id_editorial`);
 
 --
 -- Indices de la tabla `prestamos`
@@ -244,7 +248,7 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `editorial`
@@ -256,7 +260,7 @@ ALTER TABLE `editorial`
 -- AUTO_INCREMENT de la tabla `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamos`
@@ -274,11 +278,19 @@ ALTER TABLE `sanciones`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `libros`
+--
+ALTER TABLE `libros`
+  ADD CONSTRAINT `libros_ibfk_1` FOREIGN KEY (`id_autor`) REFERENCES `autores` (`id_autor`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `libros_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `libros_ibfk_3` FOREIGN KEY (`id_editorial`) REFERENCES `editorial` (`id_editorial`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `prestamos`

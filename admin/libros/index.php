@@ -16,7 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $datos = $pdo->prepare('SELECT * FROM libros WHERE titulo like CONCAT("%", :titulo, "%")');
     $datos->execute(["titulo" => $titulo]);
 } else {
-    $datos = $pdo->prepare('SELECT * FROM libros;');
+    $datos = $pdo->prepare('SELECT *,
+                                    autores.nombre AS autor,
+                                    autores.apellidos AS apellido,
+                                    categorias.nombre AS categoria,
+                                    editorial.nombre AS editorial
+                                FROM libros
+                                LEFT JOIN autores ON libros.id_autor = autores.id_autor
+                                LEFT JOIN categorias ON libros.id_categoria = categorias.id_categoria
+                                LEFT JOIN editorial ON libros.id_editorial = editorial.id_editorial');
     $datos->execute();
 }
 

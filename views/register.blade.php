@@ -17,11 +17,11 @@
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 <div class="form-group">
                     <label for="email">First Name:</label>
-                    <input type="text" name="first_name" placeholder="Enter First Name" class="form-control" value="<?php echo ($valFirstName??'')?>">
+                    <input type="text" name="nombre" placeholder="Enter First Name" class="form-control" value="<?php echo ($valFirstName??'')?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Last Name:</label>
-                    <input type="text" name="last_name" placeholder="Enter Last Name" class="form-control" value="<?php echo ($valLastName??'')?>">
+                    <input type="text" name="apellidos" placeholder="Enter Last Name" class="form-control" value="<?php echo ($valLastName??'')?>">
                 </div>
 
                 <div class="form-group">

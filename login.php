@@ -26,20 +26,20 @@ if(isset($_POST['submit'])) {
                 if(password_verify($password, $getRow['password'])) {
                     unset($getRow['password']);
                     $_SESSION = $getRow;
-                    header('location:dashboard.php');
+                    header('location:admin/dashboard.php');
                     exit();
                 } else 	{
-                    $errors[] = "Wrong Email or Password";
+                    $errors[] = "Correo o contraseña equivocada";
                 }
             } else {
-                $errors[] = "Wrong Email or Password";
+                $errors[] = "Correo o contraseña equivocada";
             }
         }
         else {
-            $errors[] = "Email address is not valid";
+            $errors[] = "La dirección de correo electrónico no es válida";
         }
     } else {
-        $errors[] = "Email and Password are required";
+        $errors[] = "Se requiere correo electrónico y contraseña";
     }
 }
 echo $blade->run("login");

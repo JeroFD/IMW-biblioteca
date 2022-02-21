@@ -7,10 +7,12 @@
         <label for="titulo">Titulo</label>
         <input class="form-control" id="titulo" type="text" name="titulo" value="{{$libros['titulo']}}">
     </p>
-    <p>
-        <label for="autor">Autor</label>
-        <input class="form-control" id="autor" type="text" name="autor" value="{{$libros['autor']}}">
-    </p>
+    <select name="autor" id="" class="form-control">
+        <option value="">Seleccione autor</option>
+        @foreach($datos["autor"] as $autores)
+            <option value="">{{$autores}}</option>
+        @endforeach
+    </select>
     <p>
     <div>¿Disponible?</div>
     <input id="si-disponible" type="radio" name="disponible" value="1" {{$libros['disponible'] ? ' checked' : ''}}> <label for="si-disponible">Si</label>
