@@ -10,13 +10,7 @@ $views = '../../views';
 $cache = '../../cache';
 
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $titulo = $_REQUEST["buscar"] ?? null;
-    $datos = $pdo->prepare('SELECT * FROM libros WHERE titulo like CONCAT("%", :titulo, "%")');
-    $datos->execute(["titulo" => $titulo]);
-} else {
-    $datos = $pdo->prepare('SELECT *,
+$sql = 'SELECT *,
                                     autores.nombre AS autor,
                                     autores.apellidos AS apellido,
                                     categorias.nombre AS categoria,
@@ -24,7 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 FROM libros
                                 LEFT JOIN autores ON libros.id_autor = autores.id_autor
                                 LEFT JOIN categorias ON libros.id_categoria = categorias.id_categoria
-                                LEFT JOIN editorial ON libros.id_editorial = editorial.id_editorial');
+                                LEFT JOIN editorial ON libros.id_editorial = editorial.id_editorial';
+
+$sql2 = $sql . ' WHERE titulo like CONCAT("%", :titulo, "%")';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $titulo = $_REQUEST["buscar"] ?? null;
+    $datos = $pdo->prepare($sql2);
+    $datos->execute(["titulo" => $titulo]);
+} else {
+    $datos = $pdo->prepare($sql);
     $datos->execute();
 }
 

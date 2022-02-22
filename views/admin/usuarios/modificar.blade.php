@@ -10,7 +10,7 @@
     <p>
         <label class="w-100" for="id_autor">Autores
             <select name="id_autor" id="id_autor" class="form-control">
-                <option disabled value="">{{$datos['autor']}} {{$datos['apellidos']}}</option>
+                <option value="">{{$datos['autor']}} {{$datos['apellidos']}}</option>
                 @foreach($autores as $autor)
                     <option value="{{$autor['id_autor']}}">{{$autor['nombre']}} {{$autor['apellidos']}}</option>
                 @endforeach
@@ -22,7 +22,7 @@
             <select name="id_categoria" id="id_categoria" class="form-control">
                 <option value="">{{$datos['categoria']}}</option>
                 @foreach($categorias as $categoria)
-                    <option value="{{$categoria['id_categoria']}}">{{$categoria['nombre']}}</option>
+                    <option value="$categoria['id_categoria']">{{$categoria['nombre']}}</option>
                 @endforeach
             </select>
         </label>
@@ -32,7 +32,7 @@
             <select name="id_editorial" id="id_editorial" class="form-control">
                 <option value="">{{$datos['editorial']}}</option>
                 @foreach($editoriales as $editorial)
-                    <option value="{{$editorial['id_editorial']}}">{{$editorial['nombre']}}</option>
+                    <option value="$editorial['id_editorial']">{{$editorial['nombre']}}</option>
                 @endforeach
             </select>
         </label>

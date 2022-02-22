@@ -1,7 +1,7 @@
 @extends('plantillaadmin')
 @section('contenido')
 <div>
-    <h1>Libros</h1>
+    <h1>Usuarios</h1>
     <?php if(isset($_SESSION["mensajes"])) { ?>
     <div class="alert alert-warning alert-dismissible fade show" role="alert" aria-label="close">
         <?= $_SESSION["mensajes"] = "Registro añadido"; ?>
@@ -12,23 +12,23 @@
     <table class="table table-striped table-bordered">
         <tr>
             <th>Código</th>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Categorias</th>
-            <th>Editorial</th>
-            <th>¿Disponible?</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Tipo</th>
+            <th>¿Activo?</th>
             <th colspan="2">Opciones</th>
         </tr>
         @foreach ($datos as $clave => $valor)
         <tr>
-            <td>{{$valor['codigo']}}</td>
-            <td>{{$valor['titulo']}}</td>
-            <td>{{$valor['autor']}} {{$valor['apellido']}}</td>
-            <td>{{$valor['categoria']}}</td>
-            <td>{{$valor['editorial']}}</td>
-            <td>{{$valor['disponible'] ? 'Si' : 'No'}}</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?codigo={{$valor['codigo']}}"><i class="fas fa-pen"></i></a></td>
-            <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?codigo={{$valor['codigo']}}"><i class="fas fa-trash"></i></a></td>
+            <td>{{$valor['id']}}</td>
+            <td>{{$valor['nombre']}}</td>
+            <td>{{$valor['apellidos']}}</td>
+            <td>{{$valor['email']}}</td>
+            <td>{{$valor['tipo']}}</td>
+            <td>{{$valor['activo'] ? 'Si' : 'No'}}</td>
+            <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?id={{$valor['id']}}"><i class="fas fa-pen"></i></a></td>
+            <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?id={{$valor['id']}}"><i class="fas fa-trash"></i></a></td>
         </tr>
         @endforeach
         <td class="text-center" colspan="8"><a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo registro</a></td>

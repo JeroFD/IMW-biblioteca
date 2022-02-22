@@ -11,15 +11,15 @@ $cache = '../../cache';
 
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
-$codigo = $_REQUEST['codigo'] ?? null;
-$titulo = $_REQUEST['titulo'] ?? null;
-$id_autor = $_REQUEST['id_autor'] ?? null;
-$id_categoria = $_REQUEST['id_categoria'] ?? null;
-$id_editorial = $_REQUEST['id_editorial'] ?? null;
-$disponible = $_REQUEST['disponible'] ?? null;
+$id = $_REQUEST['id'] ?? null;
+$nombre = $_REQUEST['nombre'] ?? null;
+$apellidos = $_REQUEST['apellidos'] ?? null;
+$email = $_REQUEST['email'] ?? null;
+$tipo = $_REQUEST['tipo'] ?? null;
+$activo = $_REQUEST['activo'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $stmt = $pdo->prepare('UPDATE libros SET titulo = :titulo, id_autor = :id_autor, id_categoria = :id_categoria, id_editorial = :id_editorial, disponible = :disponible WHERE codigo = :codigo');
+    $stmt = $pdo->prepare('UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email, tipo = :tipo, activo = :activo WHERE id = :id');
     $stmt->execute(
         [
             'codigo' => $codigo,
