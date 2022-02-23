@@ -22,50 +22,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare('UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email, tipo = :tipo, activo = :activo WHERE id = :id');
     $stmt->execute(
         [
-            'codigo' => $codigo,
-            'titulo' => $titulo,
-            'id_autor' => $id_autor,
-            'id_categoria' => $id_categoria,
-            'id_editorial' => $id_editorial,
-            'disponible' => $disponible
+            'id' => $id,
+            'nombre' => $nombre,
+            'apellidos' => $apellidos,
+            'email' => $email,
+            'tipo' => $tipo,
+            'activo' => $activo
         ]
     );
     header('Location: index.php');
 } else {
-    $stmt = $pdo->prepare('SELECT *,
-                                    autores.nombre AS autor,
-                                    autores.apellidos AS apellido,
-                                    categorias.nombre AS categoria,
-                                    editorial.nombre AS editorial
-                                FROM libros
-                                LEFT JOIN autores ON libros.id_autor = autores.id_autor
-                                LEFT JOIN categorias ON libros.id_categoria = categorias.id_categoria
-                                LEFT JOIN editorial ON libros.id_editorial = editorial.id_editorial');
-    $stmt->execute();
-    $datos = $stmt->fetch();
-
-
-    $stmt=$pdo->prepare("SELECT * FROM autores");
-    $stmt->execute();
-    $autores = $stmt->fetchAll();
-
-    $stmt=$pdo->prepare("SELECT * FROM categorias");
-    $stmt->execute();
-    $categorias = $stmt->fetchAll();
-
-    $stmt=$pdo->prepare("SELECT * FROM editorial");
-    $stmt->execute();
-    $editoriales = $stmt->fetchAll();
-
+    $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE id = :id');
+    $stmt->execute(["id" => $id]);
 }
 
+$datos = $stmt->fetch();
+
 try {
-    echo $blade->run("admin/libros/modificar.blade.php",
+    echo $blade->run("admin/usuarios/modificar.blade.php",
         [
-            "datos" => $datos,
-            "autores" => $autores,
-            "categorias" => $categorias,
-            "editoriales" => $editoriales
+            "datos" => $datos
         ]);
 } catch (Exception $e) {
 }

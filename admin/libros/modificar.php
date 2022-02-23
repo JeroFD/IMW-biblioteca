@@ -32,32 +32,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
     header('Location: index.php');
 } else {
-    $stmt = $pdo->prepare('SELECT *,
-                                    autores.nombre AS autor,
-                                    autores.apellidos AS apellido,
-                                    categorias.nombre AS categoria,
-                                    editorial.nombre AS editorial
-                                FROM libros
-                                LEFT JOIN autores ON libros.id_autor = autores.id_autor
-                                LEFT JOIN categorias ON libros.id_categoria = categorias.id_categoria
-                                LEFT JOIN editorial ON libros.id_editorial = editorial.id_editorial');
-    $stmt->execute();
-    $datos = $stmt->fetch();
-
-
-    $stmt=$pdo->prepare("SELECT * FROM autores");
-    $stmt->execute();
-    $autores = $stmt->fetchAll();
-
-    $stmt=$pdo->prepare("SELECT * FROM categorias");
-    $stmt->execute();
-    $categorias = $stmt->fetchAll();
-
-    $stmt=$pdo->prepare("SELECT * FROM editorial");
-    $stmt->execute();
-    $editoriales = $stmt->fetchAll();
+    $stmt = $pdo->prepare('SELECT * FROM libros WHERE codigo = :codigo;');
+    $stmt->execute(["codigo" => $codigo]);
 
 }
+$datos = $stmt->fetch();
+
+$stmt=$pdo->prepare("SELECT * FROM autores");
+$stmt->execute();
+$autores = $stmt->fetchAll();
+
+$stmt=$pdo->prepare("SELECT * FROM categorias");
+$stmt->execute();
+$categorias = $stmt->fetchAll();
+
+$stmt=$pdo->prepare("SELECT * FROM editorial");
+$stmt->execute();
+$editoriales = $stmt->fetchAll();
 
 try {
     echo $blade->run("admin/libros/modificar.blade.php",

@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo = $_REQUEST['tipo'] ?? null;
     $activo = $_REQUEST['activo'] ?? null;
 
-    $miInsert = $pdo->prepare('INSERT INTO libros (nombre, apellidos, email, password, tipo, activo) VALUES (:nombre, :apellidos, :email, :password, :tipo, :activo)');
+    $miInsert = $pdo->prepare('INSERT INTO usuarios (nombre, apellidos, email, password, tipo, activo) VALUES (:nombre, :apellidos, :email, :password, :tipo, :activo)');
     $miInsert->execute(
         [
             'nombre' => $nombre,
@@ -35,16 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: index.php');
 }
 
-$stmt=$pdo->prepare("SELECT * FROM usuarios");
-$stmt->execute();
-$datos = $stmt->fetchAll();
-
-try {
-    echo $blade->run("admin/usuarios/nuevo.blade.php",
-        [
-            "datos" => $datos
-        ]);
-} catch (Exception $e) {
-}
+    echo $blade->run("admin/usuarios/nuevo.blade.php")
 
 ?>

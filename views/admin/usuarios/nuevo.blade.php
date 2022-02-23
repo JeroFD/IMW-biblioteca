@@ -20,7 +20,12 @@
     </p>
     <p>
         <label for="tipo">Tipo</label>
-        <input class="form-control" id="password" type="text" name="tipo">
+        <select name="tipo" class="form-control">
+            <option value="">Seleccione tipo</option>
+            <option value="Bibliotecario">Bibliotecario</option>
+            <option value="Alumnado">Alumnado</option>
+            <option value="Profesorado">Profesorado</option>
+        </select>
     </p>
     <p>
     <div>¿Activo?</div>
