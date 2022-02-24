@@ -2,6 +2,10 @@
 
 @section('contenido')
 <h1>LIBROS</h1>
+<form class="d-flex" method="post">
+    <input class="form-control" type="text" name="buscar">
+    <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
 <div class="d-flex">
     <div class="row">
         @foreach ($libros as $l)

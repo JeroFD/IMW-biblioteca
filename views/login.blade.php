@@ -4,7 +4,7 @@
 <div class="container h-100">
     <div class="row h-100 mt-5 justify-content-center align-items-center">
         <div class="col-md-5 mt-5 pt-2 pb-5 align-self-center border bg-light">
-            <h1 class="mx-auto w-25" >Login</h1>
+            <h1 class="mx-auto w-25" >Iniciar sesión</h1>
             <?php
             if(isset($errors) && count($errors) > 0) {
                 foreach($errors as $error_msg) {
@@ -15,14 +15,14 @@
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="text" name="email" placeholder="Enter Email" class="form-control">
+                    <input type="text" name="email" placeholder="Introduce un correo electrónico" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="email">Password:</label>
-                    <input type="password" name="password" placeholder="Enter Password" class="form-control">
+                    <label for="email">Contraseña:</label>
+                    <input type="password" name="password" placeholder="Introduce una contraseña" class="form-control">
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                <a href="register.php" class="btn btn-primary">Register</a>
+                <button type="submit" name="submit" class="btn btn-outline-primary mt-2">Enviar</button>
+                <a href="register.php" class="btn btn-outline-secondary mt-2">Regístrate</a>
             </form>
         </div>
     </div>

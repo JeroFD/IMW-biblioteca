@@ -19,13 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo = $_REQUEST['tipo'] ?? null;
     $activo = $_REQUEST['activo'] ?? null;
 
+    $options = array("cost" => 4);
+    $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
+
     $miInsert = $pdo->prepare('INSERT INTO usuarios (nombre, apellidos, email, password, tipo, activo) VALUES (:nombre, :apellidos, :email, :password, :tipo, :activo)');
     $miInsert->execute(
         [
             'nombre' => $nombre,
             'apellidos' => $apellidos,
             'email' => $email,
-            'password' => $password,
+            'password' => $hashPassword,
             'tipo' => $tipo,
             'activo' => $activo
         ]

@@ -42,5 +42,11 @@ if(isset($_POST['submit'])) {
         $errors[] = "Se requiere correo electrónico y contraseña";
     }
 }
-echo $blade->run("login");
+
+echo $blade->run("login",
+    [
+        "errors" => $errors
+    ]
+);
+
 ?>

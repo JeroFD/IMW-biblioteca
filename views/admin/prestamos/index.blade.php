@@ -14,9 +14,8 @@
             <th>ID</th>
             <th>Libros</th>
             <th>Usuarios</th>
-            <th>Email</th>
-            <th>Tipo</th>
-            <th>¿Activo?</th>
+            <th>Fecha de préstamo</th>
+            <th>Fecha de devolución</th>
             <th colspan="2">Opciones</th>
         </tr>
         @foreach ($datos as $clave => $valor)

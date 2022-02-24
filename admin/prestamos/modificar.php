@@ -12,36 +12,44 @@ $cache = '../../cache';
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
 $id = $_REQUEST['id'] ?? null;
-$nombre = $_REQUEST['nombre'] ?? null;
-$apellidos = $_REQUEST['apellidos'] ?? null;
-$email = $_REQUEST['email'] ?? null;
-$tipo = $_REQUEST['tipo'] ?? null;
-$activo = $_REQUEST['activo'] ?? null;
+$libro_id = $_REQUEST['libro_id'] ?? null;
+$usuario_id = $_REQUEST['usuario_id'] ?? null;
+$fecha_prestamo = $_REQUEST['fecha_prestamo'] ?? null;
+$fecha_devolucion = $_REQUEST['fecha_devolucion'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $stmt = $pdo->prepare('UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email, tipo = :tipo, activo = :activo WHERE id = :id');
+    $stmt = $pdo->prepare('UPDATE prestamos SET libro_id = :libro_id, usuario_id = :usuario_id, fecha_prestamo = :fecha_prestamo, fecha_devolucion = :fecha_devolucion WHERE id = :id');
     $stmt->execute(
         [
             'id' => $id,
-            'nombre' => $nombre,
-            'apellidos' => $apellidos,
-            'email' => $email,
-            'tipo' => $tipo,
-            'activo' => $activo
+            'libro_id' => $libro_id,
+            'usuario_id' => $usuario_id,
+            'fecha_prestamo' => $fecha_prestamo,
+            'fecha_devolucion' => $fecha_devolucion
         ]
     );
     header('Location: index.php');
 } else {
-    $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE id = :id');
+    $stmt = $pdo->prepare('SELECT * FROM prestamos WHERE id = :id');
     $stmt->execute(["id" => $id]);
 }
 
 $datos = $stmt->fetch();
 
+$stmt=$pdo->prepare("SELECT * FROM libros");
+$stmt->execute();
+$libros = $stmt->fetchAll();
+
+$stmt=$pdo->prepare("SELECT * FROM usuarios");
+$stmt->execute();
+$usuarios = $stmt->fetchAll();
+
 try {
-    echo $blade->run("admin/usuarios/modificar.blade.php",
+    echo $blade->run("admin/prestamos/modificar.blade.php",
         [
-            "datos" => $datos
+            "datos" => $datos,
+            "libros" => $libros,
+            "usuarios" => $usuarios
         ]);
 } catch (Exception $e) {
 }

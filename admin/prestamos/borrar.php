@@ -13,7 +13,7 @@ $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
 $id = $_REQUEST['id'] ?? null;
 
-$stmt = $pdo->prepare('DELETE FROM usuarios WHERE id = :id');
+$stmt = $pdo->prepare('DELETE FROM prestamos WHERE id = :id');
 
 $stmt->execute(["id" => $id]);
 

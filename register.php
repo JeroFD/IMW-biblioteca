@@ -17,6 +17,8 @@ if(isset($_POST['submit'])) {
         $apellidos = trim($_POST['apellidos']);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
+        $activo = trim($_POST['activo']);
+        $tipo = trim($_POST['tipo']);
         $options = array("cost" => 4);
         $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
         $date = date('Y-m-d H:i:s');
@@ -27,7 +29,7 @@ if(isset($_POST['submit'])) {
             $stmt->execute($p);
 
             if($stmt->rowCount() == 0) {
-                $sql = "INSERT INTO usuarios (nombre, apellidos, email, `password`, created_at,updated_at) VALUES (:fname,:lname,:email,:pass,:created_at,:updated_at)";
+                $sql = "INSERT INTO usuarios (nombre, apellidos, email, `password`, fecha_creacion , fecha_modificacion, tipo, activo) VALUES (:fname,:lname,:email,:pass,:created_at,:updated_at, :tipo, :activo)";
                 try {
                     $handle = $pdo->prepare($sql);
                     $params = [
@@ -36,11 +38,13 @@ if(isset($_POST['submit'])) {
                         ':email' => $email,
                         ':pass' => $hashPassword,
                         ':created_at' => $date,
-                        ':updated_at' => $date
+                        ':updated_at' => $date,
+                        ':tipo' => 'Alumnado',
+                        ':activo' => 1
                     ];
 
                     $handle->execute($params);
-                    $success = 'User has been created successfully';
+                    $success = 'El usuario ha sido creado con éxito, si usted es un administrador de la biblioteca comuníquese con el bibliotecario principal para cambiarle el tipo de usuario';
                 } catch (PDOException $e) {
                     $errors[] = $e->getMessage();
                 }
@@ -50,32 +54,37 @@ if(isset($_POST['submit'])) {
                 $valEmail = '';
                 $valPassword = $password;
 
-                $errors[] = 'Email address already registered';
+                $errors[] = 'Cuenta de correo ya registrada';
             }
         } else {
-            $errors[] = "Email address is not valid";}
+            $errors[] = "La dirección de correo electrónico no es válida";}
     } else {
         if(!isset($_POST['nombre']) || empty($_POST['nombre'])){
-            $errors[] = 'First name is required';
+            $errors[] = 'Se requiere el primer nombre';
         } else {
             $valFirstName = $_POST['nombre'];
         }
         if(!isset($_POST['apellidos']) || empty($_POST['apellidos'])){
-            $errors[] = 'Last name is required';
+            $errors[] = 'Se requiere apellido';
         } else {
             $valLastName = $_POST['apellidos'];
         }
         if(!isset($_POST['email']) || empty($_POST['email'])){
-            $errors[] = 'Email is required';
+            $errors[] = 'Correo electrónico es requerido';
         } else {
             $valEmail = $_POST['email'];
         }
         if(!isset($_POST['password']) || empty($_POST['password'])) {
-            $errors[] = 'Password is required';
+            $errors[] = 'Se requiere contraseña';
         } else {
             $valPassword = $_POST['password'];
         }
     }
 }
-echo $blade->run("register");
+echo $blade->run("register",
+    [
+        "errors" => $errors,
+        "success" => $success
+    ]
+);
 ?>

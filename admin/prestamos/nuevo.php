@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fecha_prestamo = $_REQUEST['fecha_prestamo'] ?? null;
     $fecha_devolucion = $_REQUEST['fecha_devolucion'] ?? null;
 
-    $miInsert = $pdo->prepare('INSERT INTO prestamos (libro_id, usuario_id, fecha_prestamo, fecha_devolucion) VALUES (:libro_id, :usuario_id, :fecha_prestamo, :fecha_devolucion');
+    $miInsert = $pdo->prepare('INSERT INTO prestamos (libro_id, usuario_id, fecha_prestamo, fecha_devolucion) VALUES (:libro_id, :usuario_id, :fecha_prestamo, :fecha_devolucion)');
     $miInsert->execute(
         [
             'libro_id' => $libro_id,

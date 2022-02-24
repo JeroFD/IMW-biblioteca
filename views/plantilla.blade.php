@@ -26,10 +26,6 @@
                             <a class="nav-link">Disabled</a>
                         </li>
                     </ul>
-                    <form class="d-flex" method="post">
-                        <input class="form-control" type="text" name="buscar">
-                        <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
                 </div>
             </div>
         </nav>

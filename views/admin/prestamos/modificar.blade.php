@@ -1,41 +1,34 @@
 @extends('plantillaadmin')
 @section('contenido')
-<body>
-<h1>Modificar usuario</h1>
-<form method="post">
-    <p>
-        <label for="nombre">Nombre</label>
-        <input class="form-control" id="nombre" type="text" name="nombre" value="{{$datos['nombre']}}">
-    </p>
-    <p>
-        <label for="apellidos">Apellidos</label>
-        <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$datos['apellidos']}}">
-    </p>
-    <p>
-        <label for="email">Email</label>
-        <input class="form-control" id="email" type="text" name="email" value="{{$datos['email']}}">
-    </p>
-    <p>
-        <label for="password">Contraseña</label>
-        <input class="form-control" id="password" type="password" name="password" value="{{$datos['password']}}">
-    </p>
-    <p>
-    <p>
-        <label for="tipo">Tipo</label>
-        <select name="tipo" class="form-control">
-            <option value="">Selecciona tipo</option>
-            <option value="Bibliotecario">Bibliotecario</option>
-            <option value="Alumnado">Alumnado</option>
-            <option value="Profesorado">Profesorado</option>
-        </select>
-    </p>
-    <div>¿Activo?</div>
-    <input id="si-activo" type="radio" name="activo" value="1" checked> <label for="si-activo">Si</label>
-    <input id="no-activo" type="radio" name="activo" value="0"> <label for="no-activo">No</label>
-    <p>
-        <input type="hidden" name="codigo" value="{{$datos['id']}}">
-        <input class="btn btn-outline-primary" type="submit" value="Modificar">
-        <a href="index.php" class="btn btn-outline-danger">Cancelar</a>
-    </p>
-</form>
+    <h1>Modificar préstamo</h1>
+    <form action="" method="post">
+        <label class="w-100" for="libro_id">Libros
+            <select name="libro_id" id="libro_id" class="form-control">
+                <option value="">Seleccione libro</option>
+                @foreach($libros as $libro)
+                    <option value='{{$libro['codigo']}}'>{{$libro['titulo']}}</option>
+                @endforeach
+            </select>
+        </label>
+        <label class="w-100" for="usuario_id">Usuario
+            <select name="usuario_id" id="usuario_id" class="form-control">
+                <option value="">Seleccione usuario</option>
+                @foreach($usuarios as $usuario)
+                    <option value="{{$usuario['id']}}">{{$usuario['nombre']}} {{$usuario['apellidos']}}</option>
+                @endforeach
+            </select>
+        </label>
+        <p>
+            <label for="fecha_prestamo">Fecha prestamo</label>
+            <input class="form-control" id="fecha_prestamo" type="date" name="fecha_prestamo" value="{{$datos['fecha_prestamo']}}">
+        </p>
+        <p>
+            <label for="fecha_devolucion">Fecha devolucion</label>
+            <input class="form-control" id="fecha_devolucion" type="date" name="fecha_devolucion" value="{{$datos['fecha_devolucion']}}">
+        </p>
+        <p>
+            <input class="btn btn-outline-success" type="submit" value="Guardar">
+            <a class="btn btn-outline-danger" href="index.php">Cancelar</a>
+        </p>
+    </form>
 @endsection

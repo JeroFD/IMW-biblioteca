@@ -11,18 +11,23 @@ $cache = '../../cache';
 
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
+$sql = 'SELECT p.*,
+            libros.titulo AS libro,
+            usuarios.nombre AS nombre,
+            usuarios.apellidos AS apellidos
+        FROM prestamos p
+        INNER JOIN libros ON p.libro_id = libros.codigo
+        INNER JOIN usuarios ON p.usuario_id = usuarios.id
+        ORDER BY id';
+
+$sql2 = $sql . ' WHERE libros.titulo like CONCAT("%", :libro, "%")';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_REQUEST["buscar"] ?? null;
-    $datos = $pdo->prepare('SELECT * FROM prestamos WHERE id like CONCAT("%", :id, "%")');
-    $datos->execute(["id" => $id]);
+    $libro = $_REQUEST["buscar"] ?? null;
+    $datos = $pdo->prepare($sql2);
+    $datos->execute(["libro" => $libro]);
 } else {
-    $datos = $pdo->prepare('SELECT *,
-                                    libros.titulo AS libro,
-                                    usuarios.nombre AS nombre,
-                                    usuarios.apellidos AS apellidos
-                                FROM prestamos
-                                LEFT JOIN libros ON prestamos.libro_id = libros.codigo
-                                LEFT JOIN usuarios ON prestamos.usuario_id = usuarios.id');
+    $datos = $pdo->prepare($sql);
     $datos->execute();
 }
 

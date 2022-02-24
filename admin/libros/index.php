@@ -10,6 +10,7 @@ $views = '../../views';
 $cache = '../../cache';
 
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
+
 $sql = 'SELECT *,
                                     autores.nombre AS autor,
                                     autores.apellidos AS apellido,

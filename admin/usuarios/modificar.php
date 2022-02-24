@@ -15,17 +15,22 @@ $id = $_REQUEST['id'] ?? null;
 $nombre = $_REQUEST['nombre'] ?? null;
 $apellidos = $_REQUEST['apellidos'] ?? null;
 $email = $_REQUEST['email'] ?? null;
+$password = $_REQUEST['password'] ?? null;
 $tipo = $_REQUEST['tipo'] ?? null;
 $activo = $_REQUEST['activo'] ?? null;
 
+$options = array("cost" => 4);
+$hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $stmt = $pdo->prepare('UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email, tipo = :tipo, activo = :activo WHERE id = :id');
+    $stmt = $pdo->prepare('UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email, password = :password, tipo = :tipo, activo = :activo WHERE id = :id');
     $stmt->execute(
         [
             'id' => $id,
             'nombre' => $nombre,
             'apellidos' => $apellidos,
             'email' => $email,
+            'password' => $hashPassword,
             'tipo' => $tipo,
             'activo' => $activo
         ]
