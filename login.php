@@ -1,5 +1,9 @@
 <?php
 session_start();
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
+
 require_once('config.php');
 
 require "vendor/autoload.php";
@@ -25,8 +29,13 @@ if(isset($_POST['submit'])) {
                 $getRow = $handle->fetch(PDO::FETCH_ASSOC);
                 if(password_verify($password, $getRow['password'])) {
                     unset($getRow['password']);
-                    $_SESSION = $getRow;
-                    header('location:admin/dashboard.php');
+                    $_SESSION['usuarios'] = $getRow;
+                        if($_SESSION['usuarios']['tipo'] == "Bibliotecario") {
+                            header('location:admin/dashboard.php');
+                        }
+                        else {
+                            header('location:admin/dashboard2.php');
+                        }
                     exit();
                 } else 	{
                     $errors[] = "Correo o contraseña equivocada";
@@ -43,10 +52,13 @@ if(isset($_POST['submit'])) {
     }
 }
 
-echo $blade->run("login",
-    [
-        "errors" => $errors
-    ]
-);
+try {
+    echo $blade->run("login",
+        [
+            "errors" => $errors
+        ]
+    );
+} catch (Exception $e) {
+}
 
 ?>

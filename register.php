@@ -1,7 +1,11 @@
 <?php
 session_start();
-require_once('config.php');
 
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
+
+require_once('config.php');
 require "vendor/autoload.php";
 
 use eftec\bladeone\BladeOne;
@@ -17,8 +21,8 @@ if(isset($_POST['submit'])) {
         $apellidos = trim($_POST['apellidos']);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
-        $activo = trim($_POST['activo']);
-        $tipo = trim($_POST['tipo']);
+        //$activo = trim($_POST['activo']);
+        //$tipo = trim($_POST['tipo']);
         $options = array("cost" => 4);
         $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
         $date = date('Y-m-d H:i:s');
@@ -59,32 +63,35 @@ if(isset($_POST['submit'])) {
         } else {
             $errors[] = "La dirección de correo electrónico no es válida";}
     } else {
-        if(!isset($_POST['nombre']) || empty($_POST['nombre'])){
+        if(empty($_POST['nombre'])){
             $errors[] = 'Se requiere el primer nombre';
         } else {
             $valFirstName = $_POST['nombre'];
         }
-        if(!isset($_POST['apellidos']) || empty($_POST['apellidos'])){
+        if(empty($_POST['apellidos'])){
             $errors[] = 'Se requiere apellido';
         } else {
             $valLastName = $_POST['apellidos'];
         }
-        if(!isset($_POST['email']) || empty($_POST['email'])){
+        if(empty($_POST['email'])){
             $errors[] = 'Correo electrónico es requerido';
         } else {
             $valEmail = $_POST['email'];
         }
-        if(!isset($_POST['password']) || empty($_POST['password'])) {
+        if(empty($_POST['password'])) {
             $errors[] = 'Se requiere contraseña';
         } else {
             $valPassword = $_POST['password'];
         }
     }
 }
-echo $blade->run("register",
-    [
-        "errors" => $errors,
-        "success" => $success
-    ]
-);
+try {
+    echo $blade->run("register",
+        [
+            "errors" => $errors,
+            "success" => $success
+        ]
+    );
+} catch (Exception $e) {
+}
 ?>

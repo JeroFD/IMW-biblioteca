@@ -12,6 +12,11 @@
     <title>Administración</title>
 </head>
 <body>
+
+<?php if($_SESSION['usuarios']['tipo'] != "Bibliotecario")
+    die('Usuario no autorizado')
+?>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="../index.php">Administración</a>
@@ -45,19 +50,19 @@
                     <a class="nav-link active" href="../usuarios/index.php">Usuarios</a>
                 </li>
                 <li class="nav-item">
-                <?php
-                if (isset($_SESSION["login"])) {
-                    echo "Hola, ".$_SESSION["login"];
-                    echo "<a class='mx-2' href='../../logout.php'>Cerrar sesión</a>";
-                } else {
-                    echo "<a class='mr-2 ml-2 btn btn-warning' href='../../login.php'>Iniciar sesión</a>";
-                }
-                ?>
+                @if(isset($_SESSION['usuarios']))
+                   Usuario: {{$_SESSION['usuarios']['nombre']}}
+                    <a class='btn btn-outline-danger' href='../../logout.php'>Cerrar sesión</a>
+                @else
+                   <a class='btn btn-warning' href='../../login.php'>Iniciar sesión</a>
+                @endif
                 </li>
             </ul>
             <form class="d-flex" method="post">
                 <div class="input-group">
-                    <input class="form-control" type="text" name="buscar">
+                    <label for="buscar">
+                        <input class="form-control" type="text" name="buscar"/>
+                    </label>
                     <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </form>

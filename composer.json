@@ -1,5 +1,6 @@
 {
     "require": {
-        "eftec/bladeone": "^4.4"
+        "eftec/bladeone": "^4.4",
+      "ext-pdo": "*"
     }
 }
