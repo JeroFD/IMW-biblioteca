@@ -31,7 +31,7 @@
                 <td>{{$valor['fecha_fallecimiento']}}</td>
                 <td>{{$valor['lugar_nacimiento']}}</td>
                 <td>{{$valor['biografia']}}</td>
-                <td><img src="{{$valor['foto']}}"></td>
+                <td><img src="../../imagenes/autores/{{$valor['foto']}}"></td>
                 <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?id_autor={{$valor['id_autor']}}"><i class="fas fa-pen"></i></a></td>
                 <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?id_autor={{ $valor['id_autor']}}"><i class="fas fa-trash"></i></a></td>
             </tr>

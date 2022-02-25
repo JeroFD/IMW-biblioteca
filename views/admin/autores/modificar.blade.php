@@ -1,35 +1,44 @@
 @extends('plantillaadmin')
 @section('contenido')
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <h1>Modificar autor</h1>
     <p>
-        <label for="nombre">Nombre</label>
-        <input class="form-control" id="nombre" type="text" name="nombre" value="{{$autores['nombre']}}">
+        <label class="w-100" for="nombre">Nombre
+            <input class="form-control" id="nombre" type="text" name="nombre" value="{{$datos['nombre']}}">
+        </label>
     </p>
     <p>
-        <label for="apellidos">Apellidos</label>
-        <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$autores['apellidos']}}">
+        <label class="w-100" for="apellidos">Apellidos
+            <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$datos['apellidos']}}">
+        </label>
     </p>
     <p>
-        <label for="fecha_nacimiento">Fecha de nacimiento</label>
-        <input class="form-control" id="fecha_nacimiento" type="date" name="fecha_nacimiento" value="{{$autores['fecha_nacimiento']}}">
-        <label for="fecha_fallecimiento">Fecha de fallecimiento</label>
-        <input class="form-control" id="fecha_fallecimiento" type="date" name="fecha_fallecimiento" value="{{$autores['fecha_fallecimiento']}}">
+        <label class="w-100" for="fecha_nacimiento">Fecha de nacimiento
+            <input class="form-control" id="fecha_nacimiento" type="date" name="fecha_nacimiento" value="{{$datos['fecha_nacimiento']}}">
+        </label>
+        <label class="w-100" for="fecha_fallecimiento">Fecha de fallecimiento
+            <input class="form-control" id="fecha_fallecimiento" type="date" name="fecha_fallecimiento" value="{{$datos['fecha_fallecimiento']}}">
+        </label>
     </p>
     <p>
-        <label for="lugar_nacimiento">Lugar de nacimiento</label>
-        <input class="form-control" id="lugar_nacimiento" type="text" name="lugar_nacimiento" value="{{$autores['lugar_nacimiento']}}">
+        <label class="w-100" for="lugar_nacimiento">Lugar de nacimiento
+            <input class="form-control" id="lugar_nacimiento" type="text" name="lugar_nacimiento" value="{{$datos['lugar_nacimiento']}}">
+        </label>
     </p>
     <p>
-        <label for="biografia">Biografía</label>
-        <textarea class="form-control" id="biografia" name="biografia" rows="4" cols="50">{{$autores['biografia']}}</textarea>
+        <label class="w-100" for="biografia">Biografía
+        <textarea class="form-control" id="biografia" name="biografia" rows="4" cols="50">{{$datos['biografia']}}</textarea>
+        </label>
     </p>
     <p>
-        <label for="foto">Foto</label>
-        <input class="form-control" id="foto" type="text" name="foto" value="{{$autores['foto']}}">
+        <label class="w-100" for="foto">Foto
+            <input class="form-control" id="foto" type="file" name="foto" value="{{$datos['foto']}}">
+        </label>
     </p>
     <p>
-        <input type="hidden" name="id_autor" value="{{$autores['id_autor']}}">
+        <input type="hidden" name="id_autor" value="{{$datos['id_autor']}}">
+        <input type="hidden" name="foto_anterior" value="{{$datos['foto']}}">
+
         <input type="submit" value="Modificar" class="btn btn-outline-success">
         <a href="index.php" class="btn btn-outline-danger">Cancelar</a>
     </p>

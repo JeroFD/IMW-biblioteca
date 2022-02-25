@@ -13,15 +13,35 @@ $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $titulo = $_REQUEST['titulo'] ?? null;
+    $portada = $_REQUEST['portada'] ?? null;
     $id_autor = $_REQUEST['id_autor'] ?? null;
     $id_categoria = $_REQUEST['id_categoria'] ?? null;
     $id_editorial = $_REQUEST['id_editorial'] ?? null;
     $disponible = $_REQUEST['disponible'] ?? null;
 
-    $miInsert = $pdo->prepare('INSERT INTO libros (titulo, id_autor, id_categoria, id_editorial, disponible) VALUES (:titulo, :id_autor, :id_categoria, :id_editorial, :disponible)');
+    $portada = $_FILES['portada']['name'];
+    $tipo = $_FILES['portada']['type'];
+    $size = $_FILES['portada']['size'];
+
+    if (!empty($portada) && ($_FILES['portada']['size'] <= 200000000)) {
+        if (($_FILES["portada"]["type"] == "image/gif")
+            || ($_FILES["portada"]["type"] == "image/jpeg")
+            || ($_FILES["portada"]["type"] == "image/jpg")
+            || ($_FILES["portada"]["type"] == "image/png")) {
+            $directorio = '../../imagenes/libros/';
+            move_uploaded_file($_FILES['portada']['tmp_name'],$directorio.$portada);
+        } else {
+            echo "No se puede subir una imagen con ese formato ";
+        }
+    } else {
+        if($portada == !NULL) echo "La imagen es demasiado grande ";
+    }
+
+    $miInsert = $pdo->prepare('INSERT INTO libros (titulo, portada, id_autor, id_categoria, id_editorial, disponible) VALUES (:titulo, :portada, :id_autor, :id_categoria, :id_editorial, :disponible)');
     $miInsert->execute(
         [
             'titulo' => $titulo,
+            'portada' => $portada,
             'id_autor' => $id_autor,
             'id_categoria' => $id_categoria,
             'id_editorial' => $id_editorial,

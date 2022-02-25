@@ -11,7 +11,6 @@ $cache = '../../cache';
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recogemos variables
     $id_autor = $_REQUEST['id_autor'] ?? null;
     $nombre = $_REQUEST['nombre'] ?? null;
     $apellidos = $_REQUEST['apellidos'] ?? null;
@@ -21,9 +20,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $biografia = $_REQUEST['biografia'] ?? null;
     $foto = $_REQUEST['foto'] ?? null;
 
-    // Prepara INSERT
+    $foto = $_FILES['foto']['name'];
+    $tipo = $_FILES['foto']['type'];
+    $size = $_FILES['foto']['size'];
+
+    if (!empty($foto) && ($_FILES['foto']['size'] <= 200000000)) {
+        if (($_FILES["foto"]["type"] == "image/gif")
+            || ($_FILES["foto"]["type"] == "image/jpeg")
+            || ($_FILES["foto"]["type"] == "image/jpg")
+            || ($_FILES["foto"]["type"] == "image/png")) {
+            $directorio = '../../imagenes/autores/';
+            move_uploaded_file($_FILES['foto']['tmp_name'],$directorio.$foto);
+        } else {
+            echo "No se puede subir una imagen con ese formato ";
+        }
+    } else {
+        if($foto == !NULL) echo "La imagen es demasiado grande ";
+    }
+
     $miInsert = $pdo->prepare('INSERT INTO autores (nombre, apellidos, fecha_nacimiento, fecha_fallecimiento, lugar_nacimiento, biografia, foto) VALUES (:nombre, :apellidos, :fecha_nacimiento, :fecha_fallecimiento, :lugar_nacimiento, :biografia, :foto)');
-    // Ejecuta INSERT con los datos
     $miInsert->execute(
         array(
             'nombre' => $nombre,
@@ -36,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         )
     );
     $_SESSION["mensaje"] = "Registro añadido correctamente.";
-    // Redireccionamos a Leer
+
     header('Location: index.php');
 }
 echo $blade->run("admin/autores/nuevo.blade.php");

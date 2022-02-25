@@ -12,6 +12,7 @@
     <table class="table table-striped table-bordered">
         <tr>
             <th>Código</th>
+            <th>Portada</th>
             <th>Título</th>
             <th>Autor</th>
             <th>Categorias</th>
@@ -22,6 +23,7 @@
         @foreach ($datos as $clave => $valor)
         <tr>
             <td>{{$valor['codigo']}}</td>
+            <td class="text-center"><img src="../../imagenes/libros/{{$valor['portada']}}"></td>
             <td>{{$valor['titulo']}}</td>
             <td>{{$valor['autor']}} {{$valor['apellido']}}</td>
             <td>{{$valor['categoria']}}</td>
@@ -31,7 +33,7 @@
             <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?codigo={{$valor['codigo']}}"><i class="fas fa-trash"></i></a></td>
         </tr>
         @endforeach
-        <td class="text-center" colspan="8"><a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo registro</a></td>
+        <td class="text-center" colspan="9"><a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo registro</a></td>
     </table>
     <a href="../index.php" class="btn btn-outline-primary">Volver</a>
 </div>

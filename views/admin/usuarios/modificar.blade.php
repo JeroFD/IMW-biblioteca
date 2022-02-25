@@ -4,30 +4,34 @@
 <h1>Modificar usuario</h1>
 <form method="post">
     <p>
-        <label for="nombre">Nombre</label>
-        <input class="form-control" id="nombre" type="text" name="nombre" value="{{$datos['nombre']}}">
+        <label class="w-100" for="nombre">Nombre
+            <input class="form-control" id="nombre" type="text" name="nombre" value="{{$datos['nombre']}}">
+        </label>
     </p>
     <p>
-        <label for="apellidos">Apellidos</label>
-        <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$datos['apellidos']}}">
+        <label class="w-100" for="apellidos">Apellidos
+            <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$datos['apellidos']}}">
+        </label>
     </p>
     <p>
-        <label for="email">Email</label>
-        <input class="form-control" id="email" type="text" name="email" value="{{$datos['email']}}">
+        <label class="w-100" for="email">Email
+            <input class="form-control" id="email" type="text" name="email" value="{{$datos['email']}}">
+        </label>
     </p>
     <p>
-        <label for="password">Contraseña</label>
-        <input class="form-control" id="password" type="password" name="password" value="{{$datos['password']}}">
+        <label class="w-100" for="password">Contraseña
+            <input class="form-control" id="password" type="password" name="password" value="{{$datos['password']}}">
+        </label>
     </p>
     <p>
     <p>
-        <label for="tipo">Tipo</label>
-        <select name="tipo" class="form-control">
-            <option value="">Selecciona tipo</option>
-            <option value="Bibliotecario">Bibliotecario</option>
-            <option value="Alumnado">Alumnado</option>
-            <option value="Profesorado">Profesorado</option>
-        </select>
+        <label class="w-100" for="tipo">Tipo
+            <select name="tipo" class="form-control">
+                <option value="Bibliotecario" {{$datos['tipo']=="Bibliotecario"?'selected':''}}>Bibliotecario</option>
+                <option value="Alumnado" {{$datos['tipo']=="Alumnado"?'selected':''}}>Alumnado</option>
+                <option value="Profesorado" {{$datos['tipo']=="Profesorado"?'selected':''}}>Profesorado</option>
+            </select>
+        </label>
     </p>
     <div>¿Activo?</div>
     <input id="si-activo" type="radio" name="activo" value="1" checked> <label for="si-activo">Si</label>

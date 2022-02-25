@@ -3,9 +3,10 @@ session_start();
     if (empty($_SESSION["usuarios"])) {
         header('login.php');
     }
-    if ($_SESSION['usuarios']['tipo'] != "Bibliotecario"){
+/*
+    if ($_SESSION['usuarios']['tipo'] != "Bibliotecario") {
         die('Usuario no autorizado');
-    }
+    }*/
 ?>
 <!DOCTYPE html>
 <html lang="es">
