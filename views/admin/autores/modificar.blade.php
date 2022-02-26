@@ -4,25 +4,25 @@
     <h1>Modificar autor</h1>
     <p>
         <label class="w-100" for="nombre">Nombre
-            <input class="form-control" id="nombre" type="text" name="nombre" value="{{$datos['nombre']}}">
+            <input class="form-control" id="nombre" type="text" name="nombre" value="{{$datos['nombre']}}"/>
         </label>
     </p>
     <p>
         <label class="w-100" for="apellidos">Apellidos
-            <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$datos['apellidos']}}">
+            <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$datos['apellidos']}}"/>
         </label>
     </p>
     <p>
         <label class="w-100" for="fecha_nacimiento">Fecha de nacimiento
-            <input class="form-control" id="fecha_nacimiento" type="date" name="fecha_nacimiento" value="{{$datos['fecha_nacimiento']}}">
+            <input class="form-control" id="fecha_nacimiento" type="date" name="fecha_nacimiento" value="{{$datos['fecha_nacimiento']}}"/>
         </label>
         <label class="w-100" for="fecha_fallecimiento">Fecha de fallecimiento
-            <input class="form-control" id="fecha_fallecimiento" type="date" name="fecha_fallecimiento" value="{{$datos['fecha_fallecimiento']}}">
+            <input class="form-control" id="fecha_fallecimiento" type="date" name="fecha_fallecimiento" value="{{$datos['fecha_fallecimiento']}}"/>
         </label>
     </p>
     <p>
         <label class="w-100" for="lugar_nacimiento">Lugar de nacimiento
-            <input class="form-control" id="lugar_nacimiento" type="text" name="lugar_nacimiento" value="{{$datos['lugar_nacimiento']}}">
+            <input class="form-control" id="lugar_nacimiento" type="text" name="lugar_nacimiento" value="{{$datos['lugar_nacimiento']}}"/>
         </label>
     </p>
     <p>
@@ -32,7 +32,7 @@
     </p>
     <p>
         <label class="w-100" for="foto">Foto
-            <input class="form-control" id="foto" type="file" name="foto" value="{{$datos['foto']}}">
+            <input class="form-control" id="foto" type="file" name="foto"/>
         </label>
     </p>
     <p>

@@ -1,7 +1,7 @@
 @extends('plantillaadmin')
 @section('contenido')
 <div>
-    <h1>Prestamos</h1>
+    <h1>Préstamos</h1>
     <?php if(isset($_SESSION["mensajes"])) { ?>
     <div class="alert alert-warning alert-dismissible fade show" role="alert" aria-label="close">
         <?= $_SESSION["mensajes"] = "Registro añadido"; ?>
@@ -25,8 +25,8 @@
             <td>{{$valor['nombre']}} {{$valor['apellidos']}}</td>
             <td>{{$valor['fecha_prestamo']}}</td>
             <td>{{$valor['fecha_devolucion']}}</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?id={{$valor['id']}}"><i class="fas fa-pen"></i></a></td>
-            <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?id={{$valor['id']}}"><i class="fas fa-trash"></i></a></td>
+            <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?id={{$valor['id']}}"><i class="fa fa-pen"></i></a></td>
+            <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?id={{$valor['id']}}"><i class="fa fa-trash"></i></a></td>
         </tr>
         @endforeach
         <td class="text-center" colspan="8"><a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo registro</a></td>

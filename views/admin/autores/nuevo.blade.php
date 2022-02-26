@@ -13,10 +13,10 @@
             </label>
         </p>
         <p>
-            <label class="w-50" for="fecha_nacimiento">Fecha de nacimiento
+            <label class="w-100" for="fecha_nacimiento">Fecha de nacimiento
                 <input class="form-control" id="fecha_nacimiento" type="date" name="fecha_nacimiento"/>
             </label>
-            <label class="w-50" for="fecha_fallecimiento">Fecha de fallecimiento
+            <label class="w-100" for="fecha_fallecimiento">Fecha de fallecimiento
                 <input class="form-control" id="fecha_fallecimiento" type="date" name="fecha_fallecimiento"/>
             </label>
         </p>

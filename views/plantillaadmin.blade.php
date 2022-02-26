@@ -13,8 +13,11 @@
 </head>
 <body>
 
-<?php  /*if($_SESSION['usuarios']['tipo'] != "Bibliotecario")
-    die('Usuario no autorizado')*/
+<?php
+if (empty($_SESSION) || $_SESSION['usuarios']['tipo'] != "Bibliotecario") {
+    echo '<a href="../dashboard2.php">Volver a dashboard</a>';
+    die('<h2 class="fw-bold">Usuario no autorizado</h2>');
+}
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,7 +35,7 @@
                     <a class="nav-link active" href="../prestamos/index.php">Prestamos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="../devoluciones/index.php">Devoluciones</a>
+                    <a class="nav-link active" href="../sanciones/index.php">Devoluciones/Sanciones</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="../autores/index.php">Autores</a>
@@ -50,15 +53,8 @@
                     <a class="nav-link active" href="../usuarios/index.php">Usuarios</a>
                 </li>
                 <li class="nav-item m-1">
-                @if(isset($_SESSION['usuarios']))
-                        <b>Usuario:</b> {{$_SESSION['usuarios']['nombre']}}
-                    <a class='btn btn-outline-danger' href='../../logout.php'>Cerrar sesión</a>
-                @else
-                   <a class='btn btn-warning' href='../../login.php'>Iniciar sesión</a>
-                @endif
-                </li>
             </ul>
-            <form class="d-flex" method="post">
+            <form class="d-flex m-1" method="post">
                 <div class="input-group">
                     <label for="buscar">
                         <input class="form-control" type="text" name="buscar"/>
@@ -66,12 +62,25 @@
                     <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </form>
-
+            <ul class="navbar-nav">
+                <li>
+                    @if(isset($_SESSION['usuarios']))
+                        <b>Usuario:</b> {{$_SESSION['usuarios']['nombre']}}
+                        <a class='btn btn-outline-danger' href='../../logout.php'>Cerrar sesión</a>
+                    @else
+                        <a class='btn btn-warning' href='../../login.php'>Iniciar sesión</a>
+                    @endif
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
 <div class="container">
     @yield('contenido')
 </div>
+<footer class="bg-light text-center mt-5 p-2">
+    <p>© 2022 - Jerónimo Omar Falcón Dávila</p>
+    @yield('piedepagina')
+</footer>
 </body>
 </html>

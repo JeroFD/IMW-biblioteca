@@ -1,26 +1,30 @@
 @extends('plantillaadmin')
 @section('contenido')
-<body>
 <h1>Modificar usuario</h1>
-<form method="post">
+<form action="" method="post" enctype="multipart/form-data">
+    <p>
+        <label class="w-100" for="avatar">Avatar
+            <input class="form-control" id="avatar" type="file" name="avatar"/>
+        </label>
+    </p>
     <p>
         <label class="w-100" for="nombre">Nombre
-            <input class="form-control" id="nombre" type="text" name="nombre" value="{{$datos['nombre']}}">
+            <input class="form-control" id="nombre" type="text" name="nombre" value="{{$datos['nombre']}}"/>
         </label>
     </p>
     <p>
         <label class="w-100" for="apellidos">Apellidos
-            <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$datos['apellidos']}}">
+            <input class="form-control" id="apellidos" type="text" name="apellidos" value="{{$datos['apellidos']}}"/>
         </label>
     </p>
     <p>
         <label class="w-100" for="email">Email
-            <input class="form-control" id="email" type="text" name="email" value="{{$datos['email']}}">
+            <input class="form-control" id="email" type="text" name="email" value="{{$datos['email']}}"/>
         </label>
     </p>
     <p>
         <label class="w-100" for="password">Contraseña
-            <input class="form-control" id="password" type="password" name="password" value="{{$datos['password']}}">
+            <input class="form-control" id="password" type="password" name="password" value="{{$datos['password']}}"/>
         </label>
     </p>
     <p>
@@ -38,6 +42,8 @@
     <input id="no-activo" type="radio" name="activo" value="0"> <label for="no-activo">No</label>
     <p>
         <input type="hidden" name="codigo" value="{{$datos['id']}}">
+        <input type="hidden" name="avatar_anterior" value="{{$datos['avatar']}}"/>
+
         <input class="btn btn-outline-primary" type="submit" value="Modificar">
         <a href="index.php" class="btn btn-outline-danger">Cancelar</a>
     </p>

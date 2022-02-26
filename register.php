@@ -25,6 +25,25 @@ if(isset($_POST['submit'])) {
         //$tipo = trim($_POST['tipo']);
         $options = array("cost" => 4);
         $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
+
+        //Subir imagen
+        $avatar = $_FILES['avatar']['name'];
+        $tipo = $_FILES['avatar']['type'];
+        $size = $_FILES['avatar']['size'];
+
+        if (!empty($avatar) && ($_FILES['avatar']['size'] <= 200000000)) {
+            if (($_FILES["avatar"]["type"] == "image/gif")
+                || ($_FILES["avatar"]["type"] == "image/jpeg")
+                || ($_FILES["avatar"]["type"] == "image/jpg")
+                || ($_FILES["avatar"]["type"] == "image/png")) {
+                $directorio = 'imagenes/usuarios/';
+                move_uploaded_file($_FILES['avatar']['tmp_name'],$directorio.$avatar);
+            } else {
+                echo "No se puede subir una imagen con ese formato ";
+            }
+        } else {
+            if($avatar == !NULL) echo "La imagen es demasiado grande ";
+        }
         $date = date('Y-m-d H:i:s');
         if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $sql = 'SELECT * FROM usuarios WHERE email = :email';
@@ -33,10 +52,11 @@ if(isset($_POST['submit'])) {
             $stmt->execute($p);
 
             if($stmt->rowCount() == 0) {
-                $sql = "INSERT INTO usuarios (nombre, apellidos, email, `password`, fecha_creacion , fecha_modificacion, tipo, activo) VALUES (:fname,:lname,:email,:pass,:created_at,:updated_at, :tipo, :activo)";
+                $sql = "INSERT INTO usuarios (avatar, nombre, apellidos, email, `password`, fecha_creacion , fecha_modificacion, tipo, activo) VALUES (:avatar, :fname,:lname,:email,:pass,:created_at,:updated_at, :tipo, :activo)";
                 try {
                     $handle = $pdo->prepare($sql);
                     $params = [
+                        ':avatar' => $avatar,
                         ':fname' => $nombre,
                         ':lname' => $apellidos,
                         ':email' => $email,

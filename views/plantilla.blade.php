@@ -27,6 +27,16 @@
                             <a class="nav-link">Disabled</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav">
+                        <li>
+                            @if(isset($_SESSION['usuarios']))
+                                <b>Usuario:</b> {{$_SESSION['usuarios']['nombre']}}
+                                <a class='btn btn-outline-danger' href='logout.php'>Cerrar sesión</a>
+                            @else
+                                <a class='btn btn-warning' href='login.php'>Iniciar sesión</a>
+                            @endif
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -34,6 +44,7 @@
             @yield('contenido')
         </div>
         <footer class="bg-light text-center mt-5 p-2">
+            <p>© 2022 - Jerónimo Omar Falcón Dávila</p>
             @yield('piedepagina')
         </footer>
     </body>

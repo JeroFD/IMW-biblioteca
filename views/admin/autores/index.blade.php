@@ -30,10 +30,10 @@
                 <td>{{$valor['fecha_nacimiento']}}</td>
                 <td>{{$valor['fecha_fallecimiento']}}</td>
                 <td>{{$valor['lugar_nacimiento']}}</td>
-                <td>{{$valor['biografia']}}</td>
+                <td>{{substr($valor['biografia'], 0, 170)}}...</td>
                 <td><img src="../../imagenes/autores/{{$valor['foto']}}"></td>
-                <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?id_autor={{$valor['id_autor']}}"><i class="fas fa-pen"></i></a></td>
-                <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?id_autor={{ $valor['id_autor']}}"><i class="fas fa-trash"></i></a></td>
+                <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?id_autor={{$valor['id_autor']}}"><i class="fa fa-pen"></i></a></td>
+                <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?id_autor={{ $valor['id_autor']}}"><i class="fa fa-trash"></i></a></td>
             </tr>
         @endforeach
         <td class="text-center" colspan="10"><a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo registro</a></td>

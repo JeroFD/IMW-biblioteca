@@ -29,8 +29,8 @@
             <td>{{$valor['categoria']}}</td>
             <td>{{$valor['editorial']}}</td>
             <td>{{$valor['disponible'] ? 'Si' : 'No'}}</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?codigo={{$valor['codigo']}}"><i class="fas fa-pen"></i></a></td>
-            <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?codigo={{$valor['codigo']}}"><i class="fas fa-trash"></i></a></td>
+            <td><a class="btn btn-outline-primary btn-sm" href="modificar.php?codigo={{$valor['codigo']}}"><i class="fa fa-pen"></i></a></td>
+            <td><a class="btn btn-outline-danger btn-sm" onClick="javascript:return asegurar();" href="borrar.php?codigo={{$valor['codigo']}}"><i class="fa fa-trash"></i></a></td>
         </tr>
         @endforeach
         <td class="text-center" colspan="9"><a class="btn btn-outline-success" href="nuevo.php"><i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo registro</a></td>

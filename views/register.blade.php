@@ -12,14 +12,14 @@
             @if(isset($success))
                <div class="alert alert-success">{{$success}}</div>
             @endif
-            <form method="POST" action="{{$_SERVER['PHP_SELF']}}">
+            <form method="POST" action="{{$_SERVER['PHP_SELF']}}" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label class="w-100" for="email">Nombre:
+                    <label class="w-100" for="nombre">Nombre:
                         <input type="text" name="nombre" placeholder="Introduce un nombre" class="form-control w-100" value="{{($valFirstName ?? '')}}">
                     </label>
                 </div>
                 <div class="form-group">
-                    <label class="w-100" for="email">Apellidos:
+                    <label class="w-100" for="apellidos">Apellidos:
                         <input type="text" name="apellidos" placeholder="Introduce un apellido" class="form-control" value="{{($valLastName??'')}}">
                     </label>
                 </div>
@@ -30,9 +30,15 @@
                     </label>
                 </div>
 
-                <div class="form-group ">
-                    <label class="w-100" for="email">Contraseña:
+                <div class="form-group">
+                    <label class="w-100" for="password">Contraseña:
                         <input type="password" name="password" placeholder="Introduzca una contraseña" class="form-control" value="{{($valPassword??'')}}">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="w-100" for="avatar">Avatar:
+                        <input type="file" name="avatar" class="form-control"/>
                     </label>
                 </div>
 
@@ -42,8 +48,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('piedepagina')
-    <p>© 2022 - Jerónimo Omar Falcón Dávila</p>
 @endsection

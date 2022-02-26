@@ -1,11 +1,11 @@
 <?php
 session_start();
+
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
 
 require_once('config.php');
-
 require "vendor/autoload.php";
 
 use eftec\bladeone\BladeOne;
@@ -30,13 +30,16 @@ if(isset($_POST['submit'])) {
                 if(password_verify($password, $getRow['password'])) {
                     unset($getRow['password']);
                     $_SESSION['usuarios'] = $getRow;
+                    if($_SESSION['usuarios']['activo'] == 1) {
                         if($_SESSION['usuarios']['tipo'] == "Bibliotecario") {
+                            header('location:admin/dashboard2.php');
+                        } else {
                             header('location:admin/dashboard.php');
                         }
-                        else {
-                            header('location:admin/dashboard2.php');
-                        }
-                    exit();
+                    } else {
+                        $errors[] = "El usuario no está activo";
+                        unset($_SESSION['usuarios']);
+                    }
                 } else 	{
                     $errors[] = "Correo o contraseña equivocada";
                 }
@@ -51,13 +54,8 @@ if(isset($_POST['submit'])) {
         $errors[] = "Se requiere correo electrónico y contraseña";
     }
 }
-
 try {
-    echo $blade->run("login",
-        [
-            "errors" => $errors
-        ]
-    );
+    echo $blade->run("login", ["errors" => $errors]);
 } catch (Exception $e) {
 }
 

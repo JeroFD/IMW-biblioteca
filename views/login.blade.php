@@ -28,7 +28,3 @@
     </div>
 </div>
 @endsection
-
-@section('piedepagina')
-    <p>© 2022 - Jerónimo Omar Falcón Dávila</p>
-@endsection
