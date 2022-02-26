@@ -32,10 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $categoria = $datos->fetch();
 
 try {
-    echo $blade->run("admin/categorias/modificar.blade.php",
-        [
-            "categoria" => $categoria
-        ]);
+    echo $blade->run("admin/categorias/modificar.blade.php", ["categoria" => $categoria]);
 } catch (Exception $e) {
 }
 ?>

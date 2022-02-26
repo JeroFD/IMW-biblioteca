@@ -1,27 +1,42 @@
 <?php
 session_start();
-    if (empty($_SESSION["usuarios"])) {
-        header('login.php');
-    }
-/*
-    if ($_SESSION['usuarios']['tipo'] != "Bibliotecario") {
-        die('Usuario no autorizado');
-    }*/
+
+require "../config.php";
+require "../vendor/autoload.php";
+
+use eftec\bladeone\BladeOne;
+
+$views = '../views';
+$cache = '../cache';
+
+$blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
+
+$sql = 'SELECT p.*,
+            libros.titulo AS libro,
+            autores.nombre AS nombreautor,
+            autores.apellidos AS apellidosautor,
+            usuarios.nombre AS nombre,
+            usuarios.apellidos AS apellidos
+        FROM prestamos p 
+        INNER JOIN libros ON p.libro_id = libros.codigo
+        INNER JOIN usuarios ON p.usuario_id = usuarios.id
+        INNER JOIN autores ON libros.id_autor = autores.id_autor
+        WHERE usuario_id = :usuario_id';
+
+$datos = $pdo->prepare($sql);
+$datos->execute(['usuario_id' => $_SESSION['usuarios']['id']]);
+
+$sql2 = 'SELECT * FROM sanciones WHERE id_usuario = :id_usuario';
+$sanciones = $pdo->prepare($sql2);
+$sanciones->execute(["id_usuario" => $_SESSION['usuarios']['id']]);
+
+try {
+    echo $blade->run("dashboard",
+        [
+            "datos" => $datos,
+            "sanciones" => $sanciones
+        ]
+    );
+} catch (Exception $e) {
+}
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
-<body>
-	<div class="container position-absolute top-50 start-50 translate-middle list-group text-center">
-		<a class="list-group-item list-group-item-action active bg-danger border-0" aria-current="true"><h2>Biblioteca</h2></a>
-		<a class="list-group-item list-group-item-action" href="libros/index.php">Libros</a>
-		<a class="list-group-item list-group-item-action" href="categorias/index.php">Categorias</a>
-		<a class="list-group-item list-group-item-action" href="editorial/index.php">Editoriales</a>
-		<a class="list-group-item list-group-item-action" href="autores/index.php">Autores</a>
-	</div>
-</body>

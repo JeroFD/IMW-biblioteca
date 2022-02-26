@@ -32,10 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 try {
-    echo $blade->run("admin/prestamos/index.blade.php",
-        [
-            "datos" => $datos
-        ]);
+    echo $blade->run("admin/prestamos/index.blade.php", ["datos" => $datos]);
 } catch (Exception $e) {
 }
 ?>

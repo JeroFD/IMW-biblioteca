@@ -1,6 +1,7 @@
 <?php
-require "../../config.php";
+session_start();
 
+require "../../config.php";
 require "../../vendor/autoload.php";
 
 use eftec\bladeone\BladeOne;
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $miInsert = $pdo->prepare('INSERT INTO autores (nombre, apellidos, fecha_nacimiento, fecha_fallecimiento, lugar_nacimiento, biografia, foto) VALUES (:nombre, :apellidos, :fecha_nacimiento, :fecha_fallecimiento, :lugar_nacimiento, :biografia, :foto)');
     $miInsert->execute(
-        array(
+        [
             'nombre' => $nombre,
             'apellidos' => $apellidos,
             'fecha_nacimiento' => $fecha_nacimiento,
@@ -48,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'lugar_nacimiento' => $lugar_nacimiento,
             'biografia' => $biografia,
             'foto' => $foto
-        )
+        ]
     );
     $_SESSION["mensaje"] = "Registro añadido correctamente.";
 

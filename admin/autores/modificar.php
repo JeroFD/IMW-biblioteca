@@ -62,10 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $datos = $stmt->fetch();
 
 try {
-    echo $blade->run("admin/autores/modificar.blade.php",
-        [
-            "datos" => $datos
-        ]);
+    echo $blade->run("admin/autores/modificar.blade.php", ["datos" => $datos]);
 } catch (Exception $e) {
 }
 ?>

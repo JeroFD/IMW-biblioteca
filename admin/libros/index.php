@@ -11,15 +11,15 @@ $cache = '../../cache';
 
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
-$sql = 'SELECT *,
+$sql = 'SELECT l.*,
                                     autores.nombre AS autor,
                                     autores.apellidos AS apellido,
                                     categorias.nombre AS categoria,
                                     editorial.nombre AS editorial
-                                FROM libros
-                                LEFT JOIN autores ON libros.id_autor = autores.id_autor
-                                LEFT JOIN categorias ON libros.id_categoria = categorias.id_categoria
-                                LEFT JOIN editorial ON libros.id_editorial = editorial.id_editorial';
+                                FROM libros l
+                                LEFT JOIN autores ON l.id_autor = autores.id_autor
+                                LEFT JOIN categorias ON l.id_categoria = categorias.id_categoria
+                                LEFT JOIN editorial ON l.id_editorial = editorial.id_editorial';
 
 $sql2 = $sql . ' WHERE titulo like CONCAT("%", :titulo, "%")';
 
@@ -33,10 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 try {
-    echo $blade->run("admin/libros/index.blade.php",
-        [
-            "datos" => $datos
-        ]);
+    echo $blade->run("admin/libros/index.blade.php", ["datos" => $datos]);
 } catch (Exception $e) {
 }
 ?>
