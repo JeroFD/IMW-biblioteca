@@ -11,22 +11,23 @@ $cache = __DIR__ . '/cache';
 
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
+
+$sql = 'SELECT l.*,
+            autores.nombre AS autor,
+            autores.apellidos AS apellido
+        FROM libros l
+        LEFT JOIN autores ON l.id_autor = autores.id_autor';
+
+$sql2 = $sql . ' WHERE titulo like CONCAT("%", :titulo, "%")';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $titulo = $_REQUEST["buscar"] ?? null;
-    $libros = $pdo->prepare('SELECT * FROM libros WHERE titulo like CONCAT("%", :titulo, "%")');
+    $libros = $pdo->prepare($sql2);
     $libros->execute(["titulo" => $titulo]);
 } else {
-    $libros = $pdo->prepare('SELECT * FROM libros;');
+    $libros = $pdo->prepare($sql);
     $libros->execute();
 }
 
-$stmt = $pdo-> prepare('SELECT * FROM autores');
-$stmt -> execute();
-$autores = $stmt->fetchAll();
-
-echo $blade->run("index",
-    [
-        "libros" => $libros,
-        "autores" => $autores
-    ]);
+echo $blade->run("index", ["libros" => $libros,]);
 ?>
