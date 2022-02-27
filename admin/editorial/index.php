@@ -20,18 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $datos->execute();
     }
 
-if (isset($_SESSION["mensajes"])) {
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" aria-label="close">';
-    echo $_SESSION["mensajes"];
-    echo '</div>';
-    unset($_SESSION["mensajes"]);
-}
-
 try {
-    echo $blade->run("admin/editorial/index.blade.php",
-        [
-            "datos" => $datos
-        ]);
+    echo $blade->run("admin/editorial/index.blade.php", ["datos" => $datos]);
 } catch (Exception $e) {
 }
 

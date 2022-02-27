@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //Subir imagen
     $avatar = $_FILES['avatar']['name'];
-    $tipo = $_FILES['avatar']['type'];
+    $type = $_FILES['avatar']['type'];
     $size = $_FILES['avatar']['size'];
 
     if (!empty($avatar) && ($_FILES['avatar']['size'] <= 200000000)) {
@@ -55,11 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'activo' => $activo
         ]
     );
-    $_SESSION["mensaje"] = "Registro añadido correctamente.";
+    $_SESSION["mensajes"] = "Registro añadido correctamente.";
 
     header('Location: index.php');
 }
 
-    echo $blade->run("admin/usuarios/nuevo.blade.php")
+echo $blade->run("admin/usuarios/nuevo.blade.php")
 
 ?>

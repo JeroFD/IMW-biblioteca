@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if($_FILES['avatar']['size'] > 0) {
         $avatar = $_FILES['avatar']['name'];
-        $tipo = $_FILES['avatar']['type'];
+        $type = $_FILES['avatar']['type'];
         $size = $_FILES['avatar']['size'];
 
         if(!empty($avatar) && ($_FILES['avatar']['size'] <= 200000000)) {
@@ -58,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'activo' => $activo
         ]
     );
+    $_SESSION["mensajes"] = "Registro modificado correctamente";
+
     header('Location: index.php');
 } else {
     $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE id = :id');

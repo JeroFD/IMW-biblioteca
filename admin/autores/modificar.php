@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require "../../config.php";
 require "../../vendor/autoload.php";
@@ -53,6 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'foto' => $foto
         ]
     );
+    $_SESSION["mensajes"] = "Registro modificado correctamente";
+
     header('Location: index.php');
 } else {
     $stmt = $pdo->prepare('SELECT * FROM autores WHERE id_autor = :id_autor');

@@ -6,6 +6,10 @@
             .half-black {
                 background: rgba(0, 0, 0, 0.5);
             }
+            img {
+                height: 400px;
+                width: 250px;
+            }
         </style>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/fe280c8931.js" crossorigin="anonymous"></script>
@@ -21,10 +25,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="admin/dashboard.php">Administración</a>
+                            <a class="nav-link active" href="admin/dashboard.php">Panel de usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Disabled</a>
+                            <a class="nav-link active" href="admin/dashboard2.php">Panel de administración</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">

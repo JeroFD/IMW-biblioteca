@@ -4,17 +4,15 @@
     <form action="" method="post">
         <label class="w-100" for="libro_id">Libros
             <select name="libro_id" id="libro_id" class="form-control">
-                <option value="">Seleccione libro</option>
                 @foreach($libros as $libro)
-                    <option value='{{$libro['codigo']}}'>{{$libro['titulo']}}</option>
+                    <option value='{{$libro['codigo']}}' {{$datos['libro_id']==$libro['codigo']?'selected':''}}>{{$libro['titulo']}}</option>
                 @endforeach
             </select>
         </label>
         <label class="w-100" for="usuario_id">Usuario
             <select name="usuario_id" id="usuario_id" class="form-control">
-                <option value="">Seleccione usuario</option>
                 @foreach($usuarios as $usuario)
-                    <option value="{{$usuario['id']}}">{{$usuario['nombre']}} {{$usuario['apellidos']}}</option>
+                    <option value="{{$usuario['id']}}" {{$datos['usuario_id']==$usuario['id']?'selected':''}}>{{$usuario['nombre']}} {{$usuario['apellidos']}}</option>
                 @endforeach
             </select>
         </label>

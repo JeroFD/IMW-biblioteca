@@ -4,7 +4,7 @@
 <h1>Modificar libro</h1>
 <form action="" method="post" enctype="multipart/form-data">
     <p>
-        <label for="titulo">Titulo
+        <label class="w-100" for="titulo">Titulo
             <input class="form-control" id="titulo" type="text" name="titulo" value="{{$datos['titulo']}}">
         </label>
     </p>

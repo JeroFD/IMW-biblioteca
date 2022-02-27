@@ -11,11 +11,12 @@
 <div class="d-flex">
     <div class="row">
         @foreach ($libros as $l)
-            <div class="col-md-auto">
-                <img class="img-thumbnail w-100" src="imagenes/libros/{{$l["portada"]}}" alt="">
-            <div class="text-white half-black p-2">
-                <h6> {{ $l["titulo"] }}</h6>
-            </div>
+            <div class="col-md-4 mt-2 text-center">
+                <img src="imagenes/libros/{{$l["portada"]}}" alt="">
+                <div class="text-white half-black p-2">
+                    <h6> {{ $l["titulo"] }}</h6>
+                    <p class="fw-lighter">{{$l['autor']}} {{$l['apellido']}}  <i class='fas fa-circle {{($l['disponible'] == 1) ? 'text-success' : 'text-danger'}}'></i></p>
+                </div>
             </div>
         @endforeach
     </div>

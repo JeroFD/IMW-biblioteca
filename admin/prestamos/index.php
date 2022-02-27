@@ -14,7 +14,8 @@ $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 $sql = 'SELECT p.*,
             libros.titulo AS libro,
             usuarios.nombre AS nombre,
-            usuarios.apellidos AS apellidos
+            usuarios.apellidos AS apellidos,
+            TIMESTAMPDIFF(day, current_timestamp, fecha_devolucion) AS fecha_restante
         FROM prestamos p
         INNER JOIN libros ON p.libro_id = libros.codigo
         INNER JOIN usuarios ON p.usuario_id = usuarios.id

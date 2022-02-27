@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'nombre' => $nombre,
         ]
     );
+
     header('Location: index.php');
 } else {
     $stmt = $pdo->prepare('SELECT * FROM editorial WHERE id_editorial = :id_editorial;');
@@ -31,10 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $editorial = $stmt->fetch();
 
 try {
-    echo $blade->run("admin/editorial/modificar.blade.php",
-        [
-            "editorial" => $editorial
-        ]);
+    echo $blade->run("admin/editorial/modificar.blade.php", ["editorial" => $editorial]);
 } catch (Exception $e) {
 }
 

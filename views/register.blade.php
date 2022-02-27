@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="w-100" for="avatar">Avatar:
+                    <label class="w-100" for="avatar">Avatar (opcional):
                         <input type="file" name="avatar" class="form-control"/>
                     </label>
                 </div>

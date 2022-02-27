@@ -10,7 +10,7 @@
 </head>
 <?php
 if (empty($_SESSION) || $_SESSION['usuarios']['tipo'] != "Bibliotecario") {
-    echo '<a href="dashboard2.php">Volver a dashboard</a>';
+    echo '<a href="../index.php">Volver a la página principal</a>';
     die('<h2 class="fw-bold">Usuario no autorizado</h2>');
 }
 ?>

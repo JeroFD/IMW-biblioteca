@@ -52,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
             'disponible' => $disponible
         ]
     );
+
+    $_SESSION["mensajes"] = "Registro modificado correctamente";
+
     header('Location: index.php');
 } else {
     $stmt = $pdo->prepare('SELECT * FROM libros WHERE codigo = :codigo;');

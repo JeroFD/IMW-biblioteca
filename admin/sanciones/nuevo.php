@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'motivo' => $motivo
         ]
     );
-    $_SESSION["mensaje"] = "Registro añadido correctamente.";
+    $_SESSION["mensajes"] = "Registro añadido correctamente.";
 
     header('Location: index.php');
 }

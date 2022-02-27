@@ -28,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'fecha_devolucion' => $fecha_devolucion
         ]
     );
+
+    $_SESSION["mensajes"] = "Registro modificado correctamente";
+
     header('Location: index.php');
 } else {
     $stmt = $pdo->prepare('SELECT * FROM prestamos WHERE id = :id');
@@ -43,6 +46,8 @@ $libros = $stmt->fetchAll();
 $stmt=$pdo->prepare("SELECT * FROM usuarios");
 $stmt->execute();
 $usuarios = $stmt->fetchAll();
+
+
 
 try {
     echo $blade->run("admin/prestamos/modificar.blade.php",

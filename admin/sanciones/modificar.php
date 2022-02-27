@@ -41,6 +41,8 @@ $stmt=$pdo->prepare("SELECT * FROM usuarios");
 $stmt->execute();
 $usuarios = $stmt->fetchAll();
 
+$_SESSION["mensajes"] = "Registro modificado correctamente";
+
 try {
     echo $blade->run("admin/sanciones/modificar.blade.php",
         [

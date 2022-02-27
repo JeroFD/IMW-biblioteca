@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'foto' => $foto
         ]
     );
-    $_SESSION["mensaje"] = "Registro añadido correctamente.";
+    $_SESSION["mensajes"] = "Registro añadido correctamente.";
 
     header('Location: index.php');
 }

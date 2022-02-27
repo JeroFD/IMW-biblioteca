@@ -15,24 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_REQUEST['buscar'] ?? null;
     $datos = $pdo->prepare('SELECT * FROM categorias WHERE nombre LIKE CONCAT("%", :nombre, "%")');
     $datos->execute(['nombre' => $nombre]);
-    } else {
+} else {
     $datos = $pdo->prepare('SELECT * FROM categorias;');
     $datos->execute();
     }
 
-if (isset($_SESSION["mensajes"])) {
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert" aria-label="close">';
-    echo $_SESSION["mensajes"];
-    echo '</div>';
-
-    unset($_SESSION["mensajes"]);
-}
-
 try {
-    echo $blade->run("admin/categorias/index.blade.php",
-        [
-            "datos" => $datos
-        ]);
+    echo $blade->run("admin/categorias/index.blade.php", ["datos" => $datos]);
 } catch (Exception $e) {
 }
 

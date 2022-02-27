@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'disponible' => $disponible
         ]
     );
-    $_SESSION["mensaje"] = "Registro añadido correctamente.";
+    $_SESSION["mensajes"] = "Registro añadido correctamente.";
 
     header('Location: index.php');
 }

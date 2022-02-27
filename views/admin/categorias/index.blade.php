@@ -1,7 +1,13 @@
 @extends('plantillaadmin')
 @section('contenido')
 <h1>Categorías</h1>
-
+@if (isset($_SESSION["mensajes"]))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ $_SESSION["mensajes"] }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @unset($_SESSION['mensajes'])
+@endif
 <table class="table table-striped table-bordered">
     <tr>
         <th>Código</th>

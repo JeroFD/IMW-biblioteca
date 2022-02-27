@@ -2,13 +2,13 @@
 @section('contenido')
 <div>
     <h1>Usuarios</h1>
-    <?php if(isset($_SESSION["mensajes"])) { ?>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" aria-label="close">
-        <?= $_SESSION["mensajes"] = "Registro añadido"; ?>
-    </div>
-    <?php
-    unset($_SESSION["mensajes"]); }
-    ?>
+    @if (isset($_SESSION["mensajes"]))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ $_SESSION["mensajes"] }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @unset($_SESSION['mensajes'])
+    @endif
     <table class="table table-striped table-bordered">
         <tr>
             <th>Código</th>
@@ -23,7 +23,12 @@
         @foreach ($datos as $clave => $valor)
         <tr>
             <td>{{$valor['id']}}</td>
-            <td class="text-center"><img src="../../imagenes/usuarios/{{$valor['avatar']}}"></td>
+            <td class="text-center"> @if(empty($valor['avatar']))
+                                        El usuario no tiene foto
+                                        @else
+                                            <img src="../../imagenes/usuarios/{{$valor['avatar']}}">
+                                        @endif
+            </td>
             <td>{{$valor['nombre']}}</td>
             <td>{{$valor['apellidos']}}</td>
             <td>{{$valor['email']}}</td>

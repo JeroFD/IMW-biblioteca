@@ -11,6 +11,12 @@ $cache = '../cache';
 
 $blade = new BladeOne($views,$cache,BladeOne::MODE_AUTO);
 
+if (empty($_SESSION)) {
+    echo '<a href = "../index.php" > Volver a la página principal </a>';
+    die('<h2 class="fw-bold">Usuario no autorizado</h2>');
+}
+
+
 $sql = 'SELECT p.*,
             libros.titulo AS libro,
             autores.nombre AS nombreautor,

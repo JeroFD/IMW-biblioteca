@@ -15,33 +15,36 @@
 
 <?php
 if (empty($_SESSION) || $_SESSION['usuarios']['tipo'] != "Bibliotecario") {
-    echo '<a href="../dashboard2.php">Volver a dashboard</a>';
+    echo '<a href="../../index.php">Volver a la página principal</a>';
     die('<h2 class="fw-bold">Usuario no autorizado</h2>');
 }
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../index.php">Administración</a>
+        <a class="navbar-brand" href="../dashboard2.php">Panel de Administración</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto m-1 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="../../index.php">Página principal</a>
+                    <a class="nav-link active" href="../../index.php">Biblioteca</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="../prestamos/index.php">Prestamos</a>
+                    <a class="nav-link active" href="../dashboard.php">Panel de usuario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="../sanciones/index.php">Devoluciones/Sanciones</a>
+                    <a class="nav-link active" href="../prestamos/index.php">Préstamos/Devoluciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="../sanciones/index.php">Sanciones</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="../autores/index.php">Autores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="../categorias/index.php">Categorias</a>
+                    <a class="nav-link active" href="../categorias/index.php">Categorías</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="../editorial/index.php">Editorial</a>
